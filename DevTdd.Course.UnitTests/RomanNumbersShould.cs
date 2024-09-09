@@ -20,15 +20,14 @@ namespace DevTdd.Course.UnitTests
     {
         public static string Convert(int i)
         {
-            if (i == 2)
+            var number = "I";
+            var result = "";
+            for (int j = 0; j < i; j++)
             {
-                return "II";
+                result += number;
             }
-            if (i == 3)
-            {
-                return "III";
-            }
-            return "I";
+
+            return result;
         }
     }
 }
