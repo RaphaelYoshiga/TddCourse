@@ -42,6 +42,8 @@ namespace DevTdd.Course.UnitTests
         [InlineData(300, "CCC")]
         [InlineData(400, "CD")]
         [InlineData(500, "D")]
+        [InlineData(900, "CM")]
+        [InlineData(1000, "M")]
         public void ReturnRomanNumber(int number, string expected)
         {
             var romanNumber = RomanNumber.Convert(number);
@@ -54,6 +56,8 @@ namespace DevTdd.Course.UnitTests
     {
         private static Dictionary<int, string> _dictionary = new Dictionary<int, string>()
         {
+            { 1000, "M" },
+            { 900, "CM" },
             { 500, "D" },
             { 400, "CD" },
             { 100, "C" },
