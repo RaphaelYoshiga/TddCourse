@@ -29,16 +29,15 @@ namespace DevTdd.Course.UnitTests
                 return "IV";
             if (i == 5)
                 return "V";
-            
-            if (i == 6)
-                return "VI";
-            if (i == 7)
-                return "VII";
-            if (i == 8)
-                return "VIII";
+
+            var result = "";
+            if (i > 5)
+            {
+                i = i - 5;
+                result = "V";
+            }
 
             var number = "I";
-            var result = "";
             for (int j = 0; j < i; j++)
             {
                 result += number;
