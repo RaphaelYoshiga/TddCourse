@@ -38,6 +38,7 @@ namespace DevTdd.Course.UnitTests
         [InlineData(90, "XC")]
         [InlineData(100, "C")]
         [InlineData(130, "CXXX")]
+        [InlineData(149, "CXLIX")]
         public void ReturnRomanNumber(int number, string expected)
         {
             var romanNumber = RomanNumber.Convert(number);
