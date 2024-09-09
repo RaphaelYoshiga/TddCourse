@@ -26,6 +26,7 @@ namespace DevTdd.Course.UnitTests
         [InlineData(19, "XIX")]
         [InlineData(20, "XX")]
         [InlineData(30, "XXX")]
+        [InlineData(39, "XXXIX")]
         public void ReturnRomanNumber(int number, string expected)
         {
             var romanNumber = RomanNumber.Convert(number);
