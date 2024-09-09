@@ -49,7 +49,13 @@ namespace DevTdd.Course.UnitTests
             if (i == 9)
                 return "IX";
             var result = "";
-            if (i >= 40)
+
+            var dictionary = new Dictionary<int, string>()
+            {
+                { 40, "XL" }
+            };
+
+            if (dictionary.Keys.FirstOrDefault(x => i >= x) != 0)
             {
                 i = i - 40;
                 result = "XL";
