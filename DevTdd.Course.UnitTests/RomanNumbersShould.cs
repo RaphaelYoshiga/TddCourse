@@ -55,10 +55,11 @@ namespace DevTdd.Course.UnitTests
                 { 40, "XL" }
             };
 
-            if (dictionary.Keys.FirstOrDefault(x => i >= x) != 0)
+            var foundKey = dictionary.Keys.FirstOrDefault(x => i >= x);
+            if (foundKey != 0)
             {
-                i = i - 40;
-                result = "XL";
+                i = i - foundKey;
+                result = dictionary[foundKey];
                 return result + Convert(i);
             }
 
