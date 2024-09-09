@@ -35,6 +35,7 @@ namespace DevTdd.Course.UnitTests
         [InlineData(50, "L")]
         [InlineData(80, "LXXX")]
         [InlineData(89, "LXXXIX")]
+        [InlineData(90, "XC")]
         [InlineData(100, "C")]
         [InlineData(130, "CXXX")]
         public void ReturnRomanNumber(int number, string expected)
@@ -50,6 +51,7 @@ namespace DevTdd.Course.UnitTests
         private static Dictionary<int, string> _dictionary = new Dictionary<int, string>()
         {
             { 100, "C" },
+            { 90, "XC" },
             { 50, "L" },
             { 40, "XL" },
             { 10, "X" },
