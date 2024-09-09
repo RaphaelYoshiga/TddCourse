@@ -6,6 +6,7 @@ namespace DevTdd.Course.UnitTests
     {
         [Theory]
         [InlineData(1, "I")]
+        [InlineData(2, "II")]
         public void ReturnOne(int number, string expected)
         {
             var romanNumber = RomanNumber.Convert(number);
@@ -18,6 +19,10 @@ namespace DevTdd.Course.UnitTests
     {
         public static string Convert(int i)
         {
+            if (i == 2)
+            {
+                return "II";
+            }
             return "I";
         }
     }
