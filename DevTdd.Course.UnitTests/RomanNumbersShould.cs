@@ -52,7 +52,8 @@ namespace DevTdd.Course.UnitTests
 
             var dictionary = new Dictionary<int, string>()
             {
-                { 40, "XL" }
+                { 40, "XL" },
+                { 10, "X" }
             };
 
             var foundKey = dictionary.Keys.FirstOrDefault(x => i >= x);
@@ -60,13 +61,6 @@ namespace DevTdd.Course.UnitTests
             {
                 i = i - foundKey;
                 result = dictionary[foundKey];
-                return result + Convert(i);
-            }
-
-            if (i >= 10)
-            {
-                i = i - 10;
-                result = "X";
                 return result + Convert(i);
             }
 
