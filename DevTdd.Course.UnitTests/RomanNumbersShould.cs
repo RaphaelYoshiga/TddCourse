@@ -7,6 +7,7 @@ namespace DevTdd.Course.UnitTests
         [Theory]
         [InlineData(1, "I")]
         [InlineData(2, "II")]
+        [InlineData(3, "III")]
         public void ReturnOne(int number, string expected)
         {
             var romanNumber = RomanNumber.Convert(number);
@@ -22,6 +23,10 @@ namespace DevTdd.Course.UnitTests
             if (i == 2)
             {
                 return "II";
+            }
+            if (i == 3)
+            {
+                return "III";
             }
             return "I";
         }
