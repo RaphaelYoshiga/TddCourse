@@ -46,15 +46,13 @@ namespace DevTdd.Course.UnitTests
         {
             { 40, "XL" },
             { 10, "X" },
-            { 5, "V" }
+            { 9, "IX" },
+            { 5, "V" },
+            { 4, "IV" },
         };
 
         public static string Convert(int i)
         {
-            if (i == 4)
-                return "IV";
-            if (i == 9)
-                return "IX";
             var result = "";
 
           
