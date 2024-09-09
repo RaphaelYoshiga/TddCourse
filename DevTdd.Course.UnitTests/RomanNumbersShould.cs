@@ -42,6 +42,13 @@ namespace DevTdd.Course.UnitTests
 
     public class RomanNumber
     {
+        private static Dictionary<int, string> _dictionary = new Dictionary<int, string>()
+        {
+            { 40, "XL" },
+            { 10, "X" },
+            { 5, "V" }
+        };
+
         public static string Convert(int i)
         {
             if (i == 4)
@@ -50,18 +57,13 @@ namespace DevTdd.Course.UnitTests
                 return "IX";
             var result = "";
 
-            var dictionary = new Dictionary<int, string>()
-            {
-                { 40, "XL" },
-                { 10, "X" },
-                { 5, "V" }
-            };
+          
 
-            var foundKey = dictionary.Keys.FirstOrDefault(x => i >= x);
+            var foundKey = _dictionary.Keys.FirstOrDefault(x => i >= x);
             if (foundKey != 0)
             {
                 i = i - foundKey;
-                result = dictionary[foundKey];
+                result = _dictionary[foundKey];
                 return result + Convert(i);
             }
 
