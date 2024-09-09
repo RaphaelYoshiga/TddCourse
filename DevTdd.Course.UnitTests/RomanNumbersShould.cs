@@ -41,14 +41,7 @@ namespace DevTdd.Course.UnitTests
                 return "IX";
             if (i == 14)
                 return "XIV";
-            if (i == 15)
-                return "XV";
-            if (i == 16)
-                return "XVI";
-            if (i == 17)
-                return "XVII";
-            if (i == 18)
-                return "XVIII";
+
 
             var result = "";
             if (i >= 10)
@@ -60,7 +53,7 @@ namespace DevTdd.Course.UnitTests
             if (i >= 5)
             {
                 i = i - 5;
-                result = "V";
+                result += "V";
             }
 
             var number = "I";
