@@ -49,26 +49,18 @@ namespace DevTdd.Course.UnitTests
             { 9, "IX" },
             { 5, "V" },
             { 4, "IV" },
+            { 1, "I" },
         };
 
         public static string Convert(int i)
         {
             var result = "";
-
-          
-
             var foundKey = _dictionary.Keys.FirstOrDefault(x => i >= x);
             if (foundKey != 0)
             {
                 i = i - foundKey;
                 result = _dictionary[foundKey];
                 return result + Convert(i);
-            }
-
-            var number = "I";
-            for (int j = 0; j < i; j++)
-            {
-                result += number;
             }
 
             return result;
