@@ -9,6 +9,7 @@ namespace DevTdd.Course.UnitTests
         [InlineData(2, "II")]
         [InlineData(3, "III")]
         [InlineData(4, "IV")]
+        [InlineData(5, "V")]
         public void ReturnRomanNumber(int number, string expected)
         {
             var romanNumber = RomanNumber.Convert(number);
@@ -23,6 +24,8 @@ namespace DevTdd.Course.UnitTests
         {
             if (i == 4)
                 return "IV";
+            if (i == 5)
+                return "V";
 
             var number = "I";
             var result = "";
