@@ -48,18 +48,14 @@ namespace DevTdd.Course.UnitTests
                 return "IV";
             if (i == 9)
                 return "IX";
-            if (i == 40)
-                return "XL";
-            if (i == 45)
-                return "XLV";
-            if (i == 46)
-                return "XLVI";
-            if (i == 47)
-                return "XLVII";
-            if (i == 48)
-                return "XLVIII";
-
             var result = "";
+            if (i >= 40)
+            {
+                i = i - 40;
+                result = "XL";
+                return result + Convert(i);
+            }
+
             if (i >= 10)
             {
                 i = i - 10;
