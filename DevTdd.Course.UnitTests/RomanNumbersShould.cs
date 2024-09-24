@@ -44,45 +44,14 @@ namespace DevTdd.Course.UnitTests
         [InlineData(500, "D")]
         [InlineData(900, "CM")]
         [InlineData(1000, "M")]
+        [InlineData(846, "DCCCXLVI")]
+        [InlineData(1999, "MCMXCIX")]
+        [InlineData(2008, "MMVIII")]
         public void ReturnRomanNumber(int number, string expected)
         {
-            var romanNumber = RomanNumber.Convert(number);
+            var romanNumber = RomanNumbers.Convert(number);
 
             romanNumber.Should().Be(expected);
-        }
-    }
-
-    public class RomanNumber
-    {
-        private static Dictionary<int, string> _dictionary = new Dictionary<int, string>()
-        {
-            { 1000, "M" },
-            { 900, "CM" },
-            { 500, "D" },
-            { 400, "CD" },
-            { 100, "C" },
-            { 90, "XC" },
-            { 50, "L" },
-            { 40, "XL" },
-            { 10, "X" },
-            { 9, "IX" },
-            { 5, "V" },
-            { 4, "IV" },
-            { 1, "I" },
-        };
-
-        public static string Convert(int i)
-        {
-            var result = "";
-            var foundKey = _dictionary.Keys.FirstOrDefault(x => i >= x);
-            if (foundKey != 0)
-            {
-                i = i - foundKey;
-                result = _dictionary[foundKey];
-                return result + Convert(i);
-            }
-
-            return result;
         }
     }
 }
