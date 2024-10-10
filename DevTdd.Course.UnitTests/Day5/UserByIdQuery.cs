@@ -2,7 +2,12 @@
 
 namespace DevTdd.Course.UnitTests.Day5;
 
-public class UserByIdQuery
+public interface IUserByIdQuery
+{
+    UserDbRecord? GetUserById(int id);
+}
+
+public class UserByIdQuery : IUserByIdQuery
 {
     public UserDbRecord? GetUserById(int id)
     {
