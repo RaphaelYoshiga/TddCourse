@@ -36,11 +36,6 @@ namespace DevTdd.Course.UnitTests.Day5
         }
     }
 
-    public interface IUserDbToResponseMapper
-    {
-        UserResponse Map(UserDbRecord userDbRecord);
-    }
-
     public class UserController
     {
         private IUserByIdQuery _query;
