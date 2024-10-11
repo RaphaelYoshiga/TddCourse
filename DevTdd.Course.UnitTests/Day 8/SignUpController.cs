@@ -43,6 +43,25 @@ public class SignUpControllerShould
         _userRepositoryMock.Verify(x => x.Save(userDomain), Times.Once);
     }
 
+    [Theory]
+    [InlineData(VerificationResult.Denied)]
+    public void NotSaveUserDenied(VerificationResult verificationResult)
+    {
+        var userVerificationRequest = new UserVerificationRequest();
+        var signUpRequest = new SignUpRequest();
+        _signUpUserRequestToVerifierRequestMock.Setup(x => x.Map(signUpRequest))
+            .Returns(userVerificationRequest);
+        _verifierApiMock.Setup(x => x.Verify(userVerificationRequest))
+            .Returns(verificationResult);
+
+        var userDomain = new UserDomain();
+        _signUpRequestToUserDomainMock.Setup(x => x.Build(signUpRequest, verificationResult))
+            .Returns(userDomain);
+
+        _controller.SignUp(signUpRequest);
+
+        _userRepositoryMock.Verify(x => x.Save(It.IsAny<UserDomain>()), Times.Never);
+    }
 }
 
 public class SignUpController
@@ -68,6 +87,8 @@ public class SignUpController
     {
         var userVerificationRequest = _signUpRequestToVerifierRequest.Map(request);
         var verificationResult = _verifierApi.Verify(userVerificationRequest);
+        if (verificationResult == VerificationResult.Denied)
+            return;
 
         var userDomain = _signUpRequestToUserDomain.Build(request, verificationResult);
         _userRepository.Save(userDomain);

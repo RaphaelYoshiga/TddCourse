@@ -63,6 +63,41 @@ namespace DevTdd.Course.UnitTests.Day8
             _userRepositoryMock.Verify(x => x.Save(It.Is<UserDomain>(p => AssertSavedUser(p, expectedUserDomain))), Times.Once);
         }
 
+        [Fact]
+        public void DeniedByIdentityVerification()
+        {
+            var expectedVerificationRequest = new UserVerificationRequest()
+            {
+                FirstName = "John",
+                LastName = "Doe",
+                MiddleNames = "Michael",
+                Email = "john.doe@example.com",
+                PhoneNumber = "1234567890",
+            };
+            _verifierApiMock.Setup(x => x.Verify(It.Is<UserVerificationRequest>(p => AssertVerificationRequest(p, expectedVerificationRequest))))
+                .Returns(VerificationResult.Denied);
+            var signUpRequest = new SignUpRequest()
+            {
+                FirstName = "John",
+                LastName = "Doe",
+                MiddleNames = "Michael",
+                Email = "john.doe@example.com",
+                PhoneNumber = "1234567890",
+                Address = new AddressRequest
+                {
+                    Line1 = "123 Main St",
+                    Line2 = "Apt 4B",
+                    Postcode = "12345",
+                    City = "New York"
+                }
+            };
+
+            _controller.SignUp(signUpRequest);
+
+            _userRepositoryMock.Verify(x => x.Save(It.IsAny<UserDomain>()), Times.Never());
+        }
+
+
         private bool AssertVerificationRequest(UserVerificationRequest userVerificationRequest, 
             UserVerificationRequest expectedVerificationRequest)
         {
