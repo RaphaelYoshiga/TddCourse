@@ -63,10 +63,15 @@ namespace DevTdd.Course.UnitTests.Day8
             _userRepositoryMock.Verify(x => x.Save(It.Is<UserDomain>(p => AssertSavedUser(p, expectedUserDomain))), Times.Once);
         }
 
-        private bool AssertVerificationRequest(UserVerificationRequest userVerificationRequest, UserVerificationRequest expectedVerificationRequest)
+        private bool AssertVerificationRequest(UserVerificationRequest userVerificationRequest, 
+            UserVerificationRequest expectedVerificationRequest)
         {
-            userVerificationRequest.Email.Should().Be(userVerificationRequest.Email);
-            userVerificationRequest.FirstName.Should().Be(userVerificationRequest.FirstName);
+            userVerificationRequest.Email.Should().Be(expectedVerificationRequest.Email);
+            userVerificationRequest.FirstName.Should().Be(expectedVerificationRequest.FirstName);
+            userVerificationRequest.LastName.Should().Be(expectedVerificationRequest.LastName);
+            userVerificationRequest.MiddleNames.Should().Be(expectedVerificationRequest.MiddleNames);
+            userVerificationRequest.PhoneNumber.Should().Be(expectedVerificationRequest.PhoneNumber);
+
             return true;
         }
 
@@ -74,6 +79,9 @@ namespace DevTdd.Course.UnitTests.Day8
         {
             userDomain.Email.Should().Be(expectedUserDomain.Email);
             userDomain.FirstName.Should().Be(expectedUserDomain.FirstName);
+            userDomain.LastName.Should().Be(expectedUserDomain.LastName);
+            userDomain.MiddleNames.Should().Be(expectedUserDomain.MiddleNames);
+            userDomain.PhoneNumber.Should().Be(expectedUserDomain.PhoneNumber);
             userDomain.Status.Should().Be(expectedUserDomain.Status);
             return true;
         }

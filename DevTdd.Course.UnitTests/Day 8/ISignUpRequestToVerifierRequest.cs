@@ -5,16 +5,27 @@ namespace DevTdd.Course.UnitTests.Day8;
 public class SignUpRequestToVerifierRequestShould
 {
     [Theory]
-    [InlineData("raphael.yoishi@test.com")]
-    [InlineData("test.yoishi@test.com")]
-    public void Map(string email)
+    [InlineData("Raphael", "Yoshi", "midl", "raphael.yoishi@test.com", "+44073555")]
+    [InlineData("John", "Lll", "mid", "test.yoishi@test.com", "+44654455")]
+    public void Map(string firstName, string lastName, string middleNames, string email, string phoneNumber)
     {
         var mapper = new SignUpRequestToVerifierRequest();
-        var signUpRequest = new SignUpRequest() { Email = email };
+        var signUpRequest = new SignUpRequest()
+        {
+            Email = email,
+            FirstName = firstName,
+            LastName = lastName,
+            MiddleNames = middleNames,
+            PhoneNumber = phoneNumber
+        };
 
         var userVerificationRequest = mapper.Map(signUpRequest);
 
+        userVerificationRequest.FirstName.Should().Be(firstName);
+        userVerificationRequest.LastName.Should().Be(lastName);
+        userVerificationRequest.MiddleNames.Should().Be(middleNames);
         userVerificationRequest.Email.Should().Be(email);
+        userVerificationRequest.PhoneNumber.Should().Be(phoneNumber);
     }
 }
 
@@ -29,7 +40,11 @@ public class SignUpRequestToVerifierRequest : ISignUpRequestToVerifierRequest
     {
         return new UserVerificationRequest()
         {
-            Email = signUpRequest.Email
+            Email = signUpRequest.Email,
+            FirstName = signUpRequest.FirstName,
+            LastName = signUpRequest.LastName,
+            MiddleNames = signUpRequest.MiddleNames,
+            PhoneNumber = signUpRequest.PhoneNumber,
         };
     }
 }
