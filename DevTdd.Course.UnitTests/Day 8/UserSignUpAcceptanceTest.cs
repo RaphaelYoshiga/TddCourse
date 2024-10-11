@@ -1,4 +1,5 @@
 
+using FluentAssertions;
 using Moq;
 
 namespace DevTdd.Course.UnitTests.Day8
@@ -13,12 +14,26 @@ namespace DevTdd.Course.UnitTests.Day8
         {
             _verifierApiMock = new Mock<IVerifierApi>();
             _userRepositoryMock = new Mock<IUserRepository>();
-            _controller = new SignUpController(_verifierApiMock.Object, _userRepositoryMock.Object);
+            _controller = new SignUpController(_verifierApiMock.Object,
+                _userRepositoryMock.Object, 
+                new SignUpRequestToVerifierRequest(), 
+                new SignUpRequestToUserDomain());
         }
 
         [Fact]
         public void SuccessfulSignUp()
         {
+            var expectedVerificationRequest = new UserVerificationRequest()
+            {
+                FirstName = "John",
+                LastName = "Doe",
+                MiddleNames = "Michael",
+                Email = "john.doe@example.com",
+                PhoneNumber = "1234567890",
+            };
+            _verifierApiMock.Setup(x => x.Verify(It.Is<UserVerificationRequest>(p => AssertVerificationRequest(p, expectedVerificationRequest))))
+                .Returns(VerificationResult.Success);
+
             var signUpRequest = new SignUpRequest()
             {
                 FirstName = "John",
@@ -34,17 +49,6 @@ namespace DevTdd.Course.UnitTests.Day8
                     City = "New York"
                 }
             };
-            var expectedVerificationRequest = new UserVerificationRequest()
-            {
-                FirstName = "John",
-                LastName = "Doe",
-                MiddleNames = "Michael",
-                Email = "john.doe@example.com",
-                PhoneNumber = "1234567890",
-            };
-            _verifierApiMock.Setup(x => x.Verify(It.Is<UserVerificationRequest>(p => AssertVerificationRequest(p, expectedVerificationRequest))))
-                .Returns(VerificationResult.Success);
-
             _controller.SignUp(signUpRequest);
 
             var expectedUserDomain = new UserDomain()
@@ -61,12 +65,17 @@ namespace DevTdd.Course.UnitTests.Day8
 
         private bool AssertVerificationRequest(UserVerificationRequest userVerificationRequest, UserVerificationRequest expectedVerificationRequest)
         {
-            return userVerificationRequest.Email == expectedVerificationRequest.Email;
+            userVerificationRequest.Email.Should().Be(userVerificationRequest.Email);
+            userVerificationRequest.FirstName.Should().Be(userVerificationRequest.FirstName);
+            return true;
         }
 
         private bool AssertSavedUser(UserDomain userDomain, UserDomain expectedUserDomain)
         {
-            return userDomain.Email == expectedUserDomain.Email && userDomain.Status == expectedUserDomain.Status;
+            userDomain.Email.Should().Be(expectedUserDomain.Email);
+            userDomain.FirstName.Should().Be(expectedUserDomain.FirstName);
+            userDomain.Status.Should().Be(expectedUserDomain.Status);
+            return true;
         }
     }
 }
